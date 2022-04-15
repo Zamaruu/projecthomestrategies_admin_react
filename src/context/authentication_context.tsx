@@ -4,12 +4,15 @@ interface IAuthenticationState {
     isAuthenticated: boolean;
     setIsAuthenticated: (ids: boolean) => void;
     getToken: () => void;
+    signOut: () => void;
+
 }
 
 const initialState : IAuthenticationState = ({
     isAuthenticated: false,
     setIsAuthenticated: () => null,
     getToken: () => null,
+    signOut: () => null,
 });
 
 interface IProviderProps {
@@ -40,6 +43,7 @@ const AuthenticationProvider = ({children}: IProviderProps) => {
             isAuthenticated: authenticated,
             setIsAuthenticated: setAuthenticated,
             getToken: getToken,
+            signOut: signOut
         }}>
             {children}
         </authenticationContext.Provider>

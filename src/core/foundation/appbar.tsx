@@ -8,9 +8,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useContext, useState } from 'react';
 import { basepageContext } from '../../context/basepage_context';
+import { authenticationContext } from '../../context/authentication_context';
 
 const MenuAppBar = () => {
     const { setDrawerOpen, drawerOpen } = useContext(basepageContext)
+    const { signOut } = useContext(authenticationContext)
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -66,8 +68,8 @@ const MenuAppBar = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}>Einstellungen</MenuItem>
                   <MenuItem onClick={handleClose}>Mein Konto</MenuItem>
+                  <MenuItem onClick={signOut}>Abmelden</MenuItem>
                 </Menu>
               </div>
             )}
