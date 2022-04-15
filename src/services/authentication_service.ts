@@ -16,3 +16,15 @@ export const Login = async (name: string, password: string) : Promise<any> => {
         }
     );
 }
+
+export const CheckToken = async (token: string) : Promise<any> => {
+    return await fetch(
+        ClientConfig.serverURL + "/Auth/CheckToken",
+        {
+            method: "post",
+            headers: {
+                "authentication": token,
+            }
+        }
+    );
+} 

@@ -3,10 +3,13 @@ import KeyIcon from '@mui/icons-material/Key';
 import { Box, Button, CircularProgress, Grid, Paper, TextField, Typography } from "@mui/material";
 import { blue } from '@mui/material/colors';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Login } from "../../services/authentication_service";
+import { authenticationContext } from "../../context/authentication_context";
 
 const LoginPage = () => {
+    const { setIsAuthenticated, isAuthenticated } = useContext(authenticationContext)
+
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const timer = useRef<number>();
@@ -26,7 +29,8 @@ const LoginPage = () => {
                 setSuccess(true);
                 setLoading(false);
                 response.json().then((json: any) => {
-                    window.sessionStorage["token"] = json.token;
+                    window.sessionStorage["local_hs_token"] = json.token;
+                    setIsAuthenticated(true);
                 });
             })
             .catch(error => {
