@@ -3,7 +3,7 @@ import { createContext, useCallback, useState } from "react";
 interface IAuthenticationState {
     isAuthenticated: boolean;
     setIsAuthenticated: (ids: boolean) => void;
-    getToken: () => void;
+    getToken: () => string;
     signOut: () => void;
 
 }
@@ -11,7 +11,7 @@ interface IAuthenticationState {
 const initialState : IAuthenticationState = ({
     isAuthenticated: false,
     setIsAuthenticated: () => null,
-    getToken: () => null,
+    getToken: () => "",
     signOut: () => null,
 });
 
@@ -28,7 +28,7 @@ const AuthenticationProvider = ({children}: IProviderProps) => {
         setIsAuthenticated(status);
     }, [setIsAuthenticated, authenticated]);
 
-    const getToken = () => {
+    const getToken = () : string => {
         return window.sessionStorage['local_hs_token'];
     }
 

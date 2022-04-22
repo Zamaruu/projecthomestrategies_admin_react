@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import BasePageProvider from "../../context/basepage_context";
+import UserPageProvider from "../../context/userpage_context";
 import DashboardPage from "../../pages/dashboard/dashboard_page";
 import HouseholdsPage from "../../pages/household_page/household_page";
 import UsersPage from "../../pages/users_page/users_page";
@@ -24,7 +25,9 @@ const NotFoundComponent = () => {
   const UsersComponent = () => {
     return (
       <div>
-        <UsersPage></UsersPage>
+        <UserPageProvider>
+          <UsersPage></UsersPage>
+        </UserPageProvider>
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import { ClientConfig } from "../utils/ClientConfig";
+import { ClientConfig } from "../../utils/ClientConfig";
 import {Buffer} from 'buffer';
 
 interface ILoginProps {

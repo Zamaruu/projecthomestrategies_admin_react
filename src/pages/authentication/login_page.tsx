@@ -4,29 +4,26 @@ import { Box, Button, CircularProgress, Grid, Paper, TextField, Typography } fro
 import { blue } from '@mui/material/colors';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { useContext, useRef, useState } from "react";
-import { Login } from "../../services/authentication_service";
+import { Login } from "../../services/api/authentication_service";
 import { authenticationContext } from "../../context/authentication_context";
 
 const LoginPage = () => {
-    const { setIsAuthenticated, isAuthenticated } = useContext(authenticationContext)
+    const { setIsAuthenticated } = useContext(authenticationContext)
 
     const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
     const timer = useRef<number>();
 
-    const [username, setUsername] = useState<string>('admin@hs.de');
-    const [password, setPassword] = useState<string>('xxl1234');
+    const [username, setUsername] = useState<string>(''); // for dev env: admin@hs.de
+    const [password, setPassword] = useState<string>(''); // for dev env: xxl1234
 
     const handleButtonClick = () => {
         if (!loading) {
-            setSuccess(false);
             setLoading(true);
             
             console.log(username + ", " + password);
             Login(username, password)
             .then(response => {
                 console.log(response);
-                setSuccess(true);
                 setLoading(false);
                 response.json().then((json: any) => {
                     window.sessionStorage["local_hs_token"] = json.token;
@@ -35,7 +32,6 @@ const LoginPage = () => {
             })
             .catch(error => {
                 console.log(error);
-                setSuccess(false);
                 setLoading(false);
             });
         }

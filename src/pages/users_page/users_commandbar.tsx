@@ -2,24 +2,32 @@ import { Box, Button, CircularProgress, Stack } from "@mui/material";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { blue } from '@mui/material/colors';
+import { authenticationContext } from "../../context/authentication_context";
+import { userpageContext } from "../../context/userpage_context";
+import { getAllUsers } from "../../services/api/user_service";
 
-const UserCommandBar = () => {
+const UserCommandBar = () => {    
+    const { getToken } = useContext(authenticationContext);
+    const { isLoading, setIsLoading, setUsers } = useContext(userpageContext);
+
     const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
     const timer = useRef<number>();
 
     const handleButtonClick = () => {
         if (!loading) {
-            setSuccess(false);
             setLoading(true);
-            timer.current = window.setTimeout(() => {
-            setSuccess(true);
-            setLoading(false);
-            }, 2000);
+            const token = getToken();
+            getAllUsers(token).then(response => {
+                setUsers(response);
+                setLoading(false);
+            }); 
         }
     };
+
+
+
 
     return (
         <Box mt={2}>
