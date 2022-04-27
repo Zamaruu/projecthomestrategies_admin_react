@@ -53,6 +53,7 @@ const LoginPage = () => {
                             <Typography variant="h5" component="h5">
                                 Homestrategies Admin
                             </Typography>
+                            v0.0.1
                         </Box>
                         <Box pt={3} pb={3} sx={{ display: 'flex', alignItems: 'flex-end' }}>
                             <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />

@@ -13,6 +13,7 @@ export const Login = async (name: string, password: string) : Promise<any> => {
         ClientConfig.serverURL + "/Auth/signin/" + encodedString,
         {
             method: "post",
+
         }
     );
 }

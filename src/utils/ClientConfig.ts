@@ -1,4 +1,4 @@
 export const ClientConfig = {
-    serverURL: "https://194.163.182.236:5000/api", //Prduction URL
+    serverURL: "https://homestrategies.azurewebsites.net/api", //Prduction URL for SSL
     // serverURL: "http://192.168.0.71:5000/api", //Dev URL
 }
